@@ -10,61 +10,42 @@
 
 using namespace std;
 
-void point_to_string(Point *point) {
-	cout << "(" << point->x << ", " << point->y << ")";
+string point_to_string(Point *point) 
+{
+	return "(" + to_string(point->x) + ", " + to_string(point->y) + ")";
 }
 
-void el_mas_to_string(El_mas *mas) {
-	cout << "(" << mas->num << ", " << mas->j << ")";
+string int_to_string(int *a) 
+{
+	return to_string(*a);
 }
 
-void int_to_string(int *a) {
-	cout << *a << " ";
-}
-
-int compare_int(int *a, int *b){
+int compare_int(int *a, int *b)
+{
 	return *a - *b;
 }
 
-int compare_point(Point *point1, Point *point2){
+int compare_point(Point *point1, Point *point2)
+{
 	return (point1->x + point1->y) - (point2->x + point2->y);
-}
-
-void list_with_list_to_string(List<El_mas*> *list) {
-	for (int i = 0; i < list->get_size(); i++) {
-		el_mas_to_string(list->get_by_index(i));
-		cout << " ";
-	}
-	cout << "\n";
 }
 
 int main()
 {
-	//List<int*> *list = new List<int*>();
-	//list->add_end(new int(3));
-	//list->add_end(new int(2));
-	//list->add_end(new int(5));
-	//list->add_end(new int(1));
-	//list->add_by_index(3, new int(7));
-	//list->print(&int_to_string);
-	//list->sort(&compare_int);
-	//list->print(&int_to_string);
-	List<List<El_mas*>*> *list = new List<List<El_mas*>*>();
-	list->add_end(new List<El_mas*>());
-	list->add_end(new List<El_mas*>());
-	list->add_end(new List<El_mas*>());
-	list->add_end(new List<El_mas*>());
-	list->add_end(new List<El_mas*>());
-	for (int i = 0; i < list->get_size(); i++) {
-		List<El_mas*> *ilist = list->get_by_index(i);
-		for (int i = 0; i < 4; i++) {
-			ilist->add_end(new El_mas(1, 2));
-			ilist->add_end(new El_mas(3, 4));
-			ilist->add_end(new El_mas(5, 6));
-		}
+	List<int*> *list = new List<int*>();
+	for (int i = 1; i < 6; i++) 
+	{
+		list->add_end(new int(i));
 	}
-	list->print(&list_with_list_to_string);
+	list->print(&int_to_string);
+	list->clear();
+	List<Point*> *pList = new List<Point*>();
+	for (int i = 0; i < 5; i++) 
+	{
+		pList->add_end(new Point(i, i+10));
+	}
+	pList->print(&point_to_string);
 	getch();
-	delete list;
+	pList->clear();
 	return 0;
 }
